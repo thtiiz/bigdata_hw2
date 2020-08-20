@@ -32,12 +32,12 @@ def insert_data(cur, path, table_name):
     df = rename_df(df)
 
     # insert to db
-    Data.to_sql(name=table_name, con=cur)
+    df.to_sql(name=table_name, if_exists='append', con=cur, index=False)
 
 def rename_df(df):
     new_name = {
         'Area Code': 'area_code',
-        'Date': 'date',
+        'Date': 'date_',
         'Territory': 'territory',
         'Territory Size': 'territory_size',
         'Product': 'product',

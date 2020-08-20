@@ -1,27 +1,28 @@
 from pyhive import hive
-from db import init_db
+from db import init_db, insert_data
+from sqlalchemy import create_engine
 
-host_name = "localhost"
+host_name = "10.3.133.187"
 port = 10000  #default is 10000
-user = "" # user name mysql 
-password = "" # pass mysql
+user = "root" # user name mysql 
+password = "root" # pass mysql
 database="default"
 
 def hiveconnection(host_name, port, user,password, database):
     conn = hive.Connection(host=host_name, port=port, username=user,password=password, database=database, auth='CUSTOM')
-    cur = conn.cursor()
-    return cur
+    return conn
 
-def query():
+def query(cur):
     cur.execute('select name  from demo2 return limit 2')
     result = cur.fetchall()
+    print(result)
 # Call above function
 
 def main():
-    # cur = hiveconnection(host_name, port, user,password, database)
-    cur = False
+    conn = hiveconnection(host_name, port, user,password, database)
+    cur = conn.cursor()
     init_db(cur, 'init_db.sql')
-    insert_data(cur, 'Coffee_Chain.csv', 'hw2')
+    insert_data(create_engine('hive://%s@%s:%s/' & (user, host_name, port)), 'Coffee_Chain.csv', 'hw2')
 
 if __name__ == "__main__":
     main()

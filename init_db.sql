@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS hw2;
 
-CREATE TABLE hw2(
+CREATE TABLE hw2 (
   area_code int,
-  date DATE,
+  date_ DATE,
   territory varchar(255),
   territory_size varchar(255),
   product varchar(255),
