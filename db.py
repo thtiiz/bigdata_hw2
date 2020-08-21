@@ -1,6 +1,7 @@
 import re
 import pandas as pd
 from datetime import datetime
+import subprocess
 
 def init_db(cur, file):
     # Open and read the file as a single buffer
@@ -26,13 +27,20 @@ def insert_data(cur, path, table_name):
     
     # apply clean date column
     date_column = 'Date'
-    df[date_column] = df[date_column].apply(lambda d: datetime.strptime(d, '%d/%m/%Y').strftime('%d-%m-%Y'))
+    df[date_column] = df[date_column].apply(lambda d: datetime.strptime(d, '%d/%m/%Y'))
 
     # rename
     df = rename_df(df)
 
     # insert to db
-    df.to_sql(name=table_name, if_exists='append', con=cur, index=False, method='multi')
+    # df.to_sql(name=table_name, if_exists='append', con=cur, index=False, method='multi')
+    csv_file = 'cleaned_data.csv'
+    df.to_csv(csv_file, index=False)
+    
+    print(subprocess.Popen(f"hive -S -e LOAD DATA LOCAL INPATH {csv_file} INTP TABLE hw2;").stdout.read())
+
+
+
 
 def rename_df(df):
     new_name = {

@@ -22,7 +22,7 @@ def main():
     # insert data to table
     table_name = 'hw2'
     file =  'Coffee_Chain.csv'
-    # insert_data(create_engine(f'hive://{user}@{host_name}:{port}/'), file, table_name)
+    insert_data(create_engine(f'hive://{user}@{host_name}:{port}/'), file, table_name)
 
     # new query instance
     q = Query(cur, table_name)
@@ -30,8 +30,17 @@ def main():
     # top_5_profit = q.top_5_profit()
     # print('top 5 profit: ', top_5_profit)
 
-    max_expense_per_profit = q.max_expense_per_profit()
-    print('max expense per profit: ', max_expense_per_profit)
+    # max_expense_per_profit = q.max_expense_per_profit()
+    # print('max expense per profit: ', max_expense_per_profit)
+
+    # top_3_most_popular = q.top_3_most_popular()
+    # print('top 3 most popular product: ', top_3_most_popular)
+
+    # product_lines_sales_more_margin = q.product_lines_sales_more_margin()
+    # print('product lines that have sales more than margin: ', product_lines_sales_more_margin)
+
+    # different_profit = q.different_profit()
+    # print('', different_profit)
 
 
 
