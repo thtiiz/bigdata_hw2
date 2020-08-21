@@ -37,7 +37,7 @@ def insert_data(cur, path, table_name):
     csv_file = 'cleaned_data.csv'
     df.to_csv(csv_file, index=False)
     
-    print(subprocess.Popen(f"hive -S -e LOAD DATA LOCAL INPATH {csv_file} INTP TABLE hw2;").stdout.read())
+    print(subprocess.Popen(f"hive -S -e 'LOAD DATA LOCAL INPATH '{csv_file}' INTO TABLE hw2;'").stdout.read())
 
 
 
