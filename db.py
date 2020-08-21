@@ -1,7 +1,6 @@
 import re
 import pandas as pd
 from datetime import datetime
-import subprocess
 
 def init_db(cur, file):
     # Open and read the file as a single buffer
@@ -33,11 +32,7 @@ def insert_data(cur, path, table_name):
     df = rename_df(df)
 
     # insert to db
-    # df.to_sql(name=table_name, if_exists='append', con=cur, index=False, method='multi')
-    csv_file = 'cleaned_data.csv'
-    df.to_csv(csv_file, index=False)
-    
-    print(subprocess.Popen(f"hive -S -e 'LOAD DATA LOCAL INPATH '{csv_file}' INTO TABLE hw2;'").stdout.read())
+    df.to_sql(name=table_name, if_exists='append', con=cur, index=False, method='multi')
 
 
 
@@ -72,7 +67,6 @@ def clean_money(money):
 
     # not match anything
     if(not r):
-        print(123)
         return money
 
     is_negative = r.group(1)
