@@ -32,7 +32,7 @@ def insert_data(cur, path, table_name):
     df = rename_df(df)
 
     # insert to db
-    df.to_sql(name=table_name, if_exists='append', con=cur, index=False)
+    df.to_sql(name=table_name, if_exists='append', con=cur, index=False, method='multi')
 
 def rename_df(df):
     new_name = {

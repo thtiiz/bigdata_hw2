@@ -21,8 +21,10 @@ def query(cur):
 def main():
     conn = hiveconnection(host_name, port, user,password, database)
     cur = conn.cursor()
+    # create table
     init_db(cur, 'init_db.sql')
-    insert_data(create_engine('hive://%s@%s:%s/' & (user, host_name, port)), 'Coffee_Chain.csv', 'hw2')
+    # insert data to table
+    insert_data(create_engine(f'hive://{user}@{host_name}:{port}/'), 'Coffee_Chain.csv', 'hw2')
 
 if __name__ == "__main__":
     main()
