@@ -25,7 +25,7 @@ class Query:
         return result
 
     def top_3_most_popular(self):
-        self.cur.execute(f'''SELECT product, SUM(sales) / SUM(cogs) as amount
+        self.cur.execute(f'''SELECT product, COUNT(product) as amount
             FROM {self.table_name}
             GROUP BY product
             ORDER BY amount DESC
@@ -43,7 +43,7 @@ class Query:
                 HAVING total_sales > total_margin
             ) s
         ''')
-        result = self.cur.fetchone()
+        result = self.cur.fetchall()
         return result
 
     def different_profit(self):
@@ -60,5 +60,5 @@ class Query:
                 GROUP BY YEAR(date_)
             )
         ''')
-        result = self.cur.fetchall()
+        result = self.cur.fetchone()
         return result

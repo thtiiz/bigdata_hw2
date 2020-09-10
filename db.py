@@ -10,6 +10,7 @@ def init_db(cur, file):
 
     # all SQL commands (split on ';')
     sqlCommands = sqlFile.split(';')
+
     # clear empty string
     sqlCommands = list(filter(None, sqlCommands))
 
@@ -18,7 +19,8 @@ def init_db(cur, file):
 
 def insert_data(cur, path, table_name):
     df = pd.read_csv(path)
-    money_columns = ['Budget COGS',	'Budget Margin', 'Budget Profit', 'Budget Sales', 'COGS', 'Inventory', 'Margin', 'Marketing', 'Profit', 'Sales', 'Total Expenses']
+    money_columns = ['Budget COGS',	'Budget Margin', 'Budget Profit', 'Budget Sales',
+    'COGS', 'Inventory', 'Margin', 'Marketing', 'Profit', 'Sales', 'Total Expenses']
 
     # apply clean_money function and cast to int
     for money_column in money_columns:

@@ -17,30 +17,30 @@ def main():
     conn = hiveconnection(host_name, port, user,password, database)
     cur = conn.cursor()
     # create table
-    # init_db(cur, 'init_db.sql')
+    init_db(cur, 'init_db.sql')
     
     # insert data to table
-    table_name = 'hw2'
+    table_name = 'coffee_chain'
     file =  'Coffee_Chain.csv'
     insert_data(create_engine(f'hive://{user}@{host_name}:{port}/'), file, table_name)
 
     # new query instance
     q = Query(cur, table_name)
 
-    # top_5_profit = q.top_5_profit()
-    # print('top 5 profit: ', top_5_profit)
+    top_5_profit = q.top_5_profit()
+    print('top 5 state (high profit): ', top_5_profit)
 
-    # max_expense_per_profit = q.max_expense_per_profit()
-    # print('max expense per profit: ', max_expense_per_profit)
+    max_expense_per_profit = q.max_expense_per_profit()
+    print('max expense per profit: ', max_expense_per_profit)
 
-    # top_3_most_popular = q.top_3_most_popular()
-    # print('top 3 most popular product: ', top_3_most_popular)
+    top_3_most_popular = q.top_3_most_popular()
+    print('top 3 most popular product: ', top_3_most_popular)
 
-    # product_lines_sales_more_margin = q.product_lines_sales_more_margin()
-    # print('product lines that have sales more than margin: ', product_lines_sales_more_margin)
+    product_lines_sales_more_margin = q.product_lines_sales_more_margin()
+    print('product lines that have sales more than margin: ', product_lines_sales_more_margin)
 
-    # different_profit = q.different_profit()
-    # print('', different_profit)
+    different_profit = q.different_profit()
+    print('from year 2012 and year 2013 for December: ', different_profit)
 
 
 

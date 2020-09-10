@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS hw2;
+DROP TABLE IF EXISTS coffee_chain;
 
-CREATE TABLE hw2 (
+CREATE TABLE coffee_chain (
   area_code int,
   date_ DATE,
   territory varchar(255),
